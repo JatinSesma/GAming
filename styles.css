@@ -2279,6 +2279,8 @@ body.modal-open {
     flex: 1;
     padding: 2rem;
     background: rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    max-height: 100%;
 }
 
 .wallet-tabs {

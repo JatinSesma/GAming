@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Buttons</title>
+</head>
+<body>
+    <h1>Button Test</h1>
+    
+    <button onclick="testShowLogin()">Test showLogin</button>
+    <button onclick="testShowRegister()">Test showRegister</button>
+    
+    <div id="results"></div>
+    
+    <script src="script-fixed.js"></script>
+    <script>
+        function testShowLogin() {
+            console.log('Testing showLogin...');
+            if (typeof showLogin === 'function') {
+                console.log('showLogin function exists');
+                document.getElementById('results').innerHTML += '<p style="color: green;">✓ showLogin function exists</p>';
+                try {
+                    showLogin();
+                    document.getElementById('results').innerHTML += '<p style="color: green;">✓ showLogin executed successfully</p>';
+                } catch (error) {
+                    document.getElementById('results').innerHTML += '<p style="color: red;">✗ showLogin error: ' + error.message + '</p>';
+                }
+            } else {
+                console.log('showLogin function NOT found');
+                document.getElementById('results').innerHTML += '<p style="color: red;">✗ showLogin function NOT found</p>';
+            }
+        }
+        
+        function testShowRegister() {
+            console.log('Testing showRegister...');
+            if (typeof showRegister === 'function') {
+                console.log('showRegister function exists');
+                document.getElementById('results').innerHTML += '<p style="color: green;">✓ showRegister function exists</p>';
+                try {
+                    showRegister();
+                    document.getElementById('results').innerHTML += '<p style="color: green;">✓ showRegister executed successfully</p>';
+                } catch (error) {
+                    document.getElementById('results').innerHTML += '<p style="color: red;">✗ showRegister error: ' + error.message + '</p>';
+                }
+            } else {
+                console.log('showRegister function NOT found');
+                document.getElementById('results').innerHTML += '<p style="color: red;">✗ showRegister function NOT found</p>';
+            }
+        }
+        
+        // Test on page load
+        window.onload = function() {
+            console.log('Page loaded, testing functions...');
+            document.getElementById('results').innerHTML = '<h3>Function Tests:</h3>';
+            
+            const functions = ['showLogin', 'showRegister', 'closeModal', 'showWallet'];
+            functions.forEach(funcName => {
+                if (typeof window[funcName] === 'function') {
+                    document.getElementById('results').innerHTML += '<p style="color: green;">✓ ' + funcName + ' is available globally</p>';
+                } else {
+                    document.getElementById('results').innerHTML += '<p style="color: red;">✗ ' + funcName + ' is NOT available globally</p>';
+                }
+            });
+        };
+    </script>
+</body>
+</html>

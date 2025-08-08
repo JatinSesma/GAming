@@ -535,26 +535,47 @@ document.addEventListener('DOMContentLoaded', function() {
         mainSite.style.display = 'none';
     }
     
+    // Ensure background scroll is enabled initially
+    document.body.classList.remove('modal-open');
+    
     console.log('GameHub initialized successfully');
+    
+    // Test that buttons work
+    setTimeout(() => {
+        console.log('Testing button functionality...');
+        const loginBtn = document.querySelector('button[onclick="showLogin()"]');
+        const registerBtn = document.querySelector('button[onclick="showRegister()"]');
+        
+        if (loginBtn) {
+            console.log('✓ Login button found in DOM');
+        } else {
+            console.error('✗ Login button NOT found in DOM');
+        }
+        
+        if (registerBtn) {
+            console.log('✓ Register button found in DOM');
+        } else {
+            console.error('✗ Register button NOT found in DOM');
+        }
+        
+        // Test function availability
+        if (typeof window.showLogin === 'function') {
+            console.log('✓ showLogin function is globally available');
+        } else {
+            console.error('✗ showLogin function is NOT globally available');
+        }
+        
+        if (typeof window.showRegister === 'function') {
+            console.log('✓ showRegister function is globally available');
+        } else {
+            console.error('✗ showRegister function is NOT globally available');
+        }
+    }, 500);
 });
 
-// Make functions globally available
-window.showLogin = showLogin;
-window.showRegister = showRegister;
-window.closeModal = closeModal;
-window.showWallet = showWallet;
-window.logout = logout;
-window.playGame = playGame;
-window.login = login;
-window.sendOTP = sendOTP;
-window.showForgotPassword = showForgotPassword;
-window.switchLoginMethod = switchLoginMethod;
-window.switchRegisterMethod = switchRegisterMethod;
-window.addFunds = addFunds;
-window.showTab = showTab;
+// Functions will be registered globally at the end of the file
 
-console.log('All functions registered globally');// Close m
-odal when clicking outside (but not for wallet modal to prevent accidental closes)
+// Close modal when clicking outside (but not for wallet modal to prevent accidental closes)
 window.onclick = function(event) {
     const modals = document.querySelectorAll('.modal');
     modals.forEach(modal => {
@@ -580,3 +601,58 @@ document.addEventListener('keydown', function(event) {
 document.addEventListener('DOMContentLoaded', function() {
     document.body.classList.remove('modal-open');
 });
+
+// CRITICAL: Ensure all functions are globally available for onclick handlers
+// This must be at the end to ensure all functions are defined first
+
+console.log('Making all functions globally available...');
+
+// Core authentication functions
+window.showLogin = showLogin;
+window.showRegister = showRegister;
+window.closeModal = closeModal;
+window.closeAllModals = closeAllModals;
+
+// Wallet functions
+window.showWallet = showWallet;
+window.showWalletTab = showWalletTab;
+window.addFunds = addFunds;
+window.addCustomFunds = addCustomFunds;
+window.withdrawFunds = withdrawFunds;
+window.withdrawCustomFunds = withdrawCustomFunds;
+window.showTab = showTab;
+
+// Game functions
+window.playGame = playGame;
+window.logout = logout;
+
+// Login/Register form functions
+window.switchLoginMethod = switchLoginMethod;
+window.switchRegisterMethod = switchRegisterMethod;
+window.login = login;
+window.sendOTP = sendOTP;
+
+// Forgot password functions
+window.showForgotPassword = showForgotPassword;
+
+// Test function to verify everything is working
+window.testFunctions = function() {
+    const functions = ['showLogin', 'showRegister', 'closeModal', 'showWallet'];
+    functions.forEach(funcName => {
+        if (typeof window[funcName] === 'function') {
+            console.log('✓', funcName, 'is available');
+        } else {
+            console.error('✗', funcName, 'is NOT available');
+        }
+    });
+};
+
+// Auto-test on load
+setTimeout(() => {
+    console.log('Auto-testing functions...');
+    if (typeof window.testFunctions === 'function') {
+        window.testFunctions();
+    }
+}, 1000);
+
+console.log('All functions registered globally - buttons should work now!');

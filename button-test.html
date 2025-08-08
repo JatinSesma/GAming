@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Test - GameHub</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            padding: 20px; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        
+        .test-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        button { 
+            padding: 15px 30px; 
+            margin: 10px; 
+            font-size: 16px; 
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary-large {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #333;
+        }
+        
+        .btn-secondary-large {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+        }
+        
+        .results {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            text-align: left;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 10% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .close {
+            color: white;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            right: 15px;
+            top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🎮 GameHub Button Test</h1>
+        <p>Testing if login and register buttons work properly</p>
+        
+        <div>
+            <button class="btn-primary-large" onclick="showRegister()">
+                <i class="fas fa-user-plus"></i> Create Account
+            </button>
+            <button class="btn-secondary-large" onclick="showLogin()">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </button>
+        </div>
+        
+        <div>
+            <button onclick="testAllFunctions()">Test All Functions</button>
+            <button onclick="clearResults()">Clear Results</button>
+        </div>
+        
+        <div class="results" id="results">
+            <h3>Test Results:</h3>
+            <p>Click buttons above to test functionality...</p>
+        </div>
+    </div>
+
+    <!-- Simple Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2>Login Modal</h2>
+            <p>✅ Login button works! Modal opened successfully.</p>
+            <button onclick="closeModal('loginModal')">Close</button>
+        </div>
+    </div>
+
+    <!-- Simple Register Modal -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('registerModal')">&times;</span>
+            <h2>Register Modal</h2>
+            <p>✅ Register button works! Modal opened successfully.</p>
+            <button onclick="closeModal('registerModal')">Close</button>
+        </div>
+    </div>
+
+    <script src="script-fixed.js"></script>
+    <script>
+        function testAllFunctions() {
+            const results = document.getElementById('results');
+            results.innerHTML = '<h3>Function Test Results:</h3>';
+            
+            const functionsToTest = [
+                'showLogin', 'showRegister', 'closeModal', 'showWallet', 
+                'playGame', 'logout', 'switchLoginMethod', 'switchRegisterMethod'
+            ];
+            
+            functionsToTest.forEach(funcName => {
+                if (typeof window[funcName] === 'function') {
+                    results.innerHTML += `<p style="color: #27ae60;">✅ ${funcName} - Available</p>`;
+                } else {
+                    results.innerHTML += `<p style="color: #e74c3c;">❌ ${funcName} - Missing</p>`;
+                }
+            });
+            
+            // Test if buttons exist in DOM
+            const loginBtn = document.querySelector('button[onclick="showLogin()"]');
+            const registerBtn = document.querySelector('button[onclick="showRegister()"]');
+            
+            if (loginBtn) {
+                results.innerHTML += `<p style="color: #27ae60;">✅ Login button found in DOM</p>`;
+            } else {
+                results.innerHTML += `<p style="color: #e74c3c;">❌ Login button NOT found in DOM</p>`;
+            }
+            
+            if (registerBtn) {
+                results.innerHTML += `<p style="color: #27ae60;">✅ Register button found in DOM</p>`;
+            } else {
+                results.innerHTML += `<p style="color: #e74c3c;">❌ Register button NOT found in DOM</p>`;
+            }
+        }
+        
+        function clearResults() {
+            document.getElementById('results').innerHTML = '<h3>Test Results:</h3><p>Click buttons above to test functionality...</p>';
+        }
+        
+        // Auto-test when page loads
+        window.addEventListener('load', function() {
+            setTimeout(testAllFunctions, 1000);
+        });
+    </script>
+</body>
+</html>
