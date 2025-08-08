@@ -1,0 +1,2675 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+.header {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.logo i {
+    margin-right: 10px;
+    color: #ffd700;
+}
+
+.nav {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.nav a:hover {
+    color: #ffd700;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn-login, .btn-register {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-login {
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+}
+
+.btn-register {
+    background: #ffd700;
+    color: #333;
+}
+
+.btn-login:hover, .btn-register:hover {
+    transform: translateY(-2px);
+}
+
+/* Hero Section */
+.hero {
+    padding: 150px 0 100px;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #ffd700, #ffed4e);
+    color: #333;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+}
+
+/* Games Section */
+.games-section {
+    padding: 80px 0;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.games-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+}
+
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.game-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.game-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.game-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.game-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #ffd700;
+}
+
+/* Dashboard */
+.dashboard {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 70px;
+    z-index: 999;
+}
+
+.dashboard-header {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.balance {
+    background: rgba(255, 215, 0, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    border: 1px solid #ffd700;
+}
+
+.balance i {
+    color: #ffd700;
+    margin-right: 0.5rem;
+}
+
+.btn-wallet {
+    background: #27ae60;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-left: 1rem;
+}
+
+.btn-wallet:hover {
+    background: #2ecc71;
+    transform: translateY(-2px);
+}
+
+.btn-logout {
+    background: #ff4757;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-logout:hover {
+    background: #ff3742;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    margin: 5% auto;
+    padding: 2rem;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.game-content {
+    max-width: 800px;
+    height: 70vh;
+}
+
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+}
+
+.close:hover {
+    color: #ffd700;
+}
+
+.modal-content h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #ffd700;
+}
+
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.modal-content input {
+    padding: 1rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.modal-content input:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.modal-content p {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.modal-content a {
+    color: #ffd700;
+    text-decoration: none;
+}
+
+.modal-content a:hover {
+    text-decoration: underline;
+}
+
+/* Game Area */
+#gameArea {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.game-interface {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 2rem;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 600px;
+}
+
+.game-controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.game-btn {
+    background: #ffd700;
+    color: #333;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.game-btn:hover {
+    background: #ffed4e;
+    transform: translateY(-2px);
+}
+
+.game-btn:disabled {
+    background: #666;
+    color: #999;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .header .container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .nav {
+        gap: 1rem;
+    }
+    
+    .hero h1 {
+        font-size: 2rem;
+    }
+    
+    .games-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .dashboard-header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}/* 
+Wallet Styles */
+.wallet-info {
+    text-align: center;
+}
+
+.balance-display {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+}
+
+.balance-amount {
+    font-size: 2rem;
+    color: #ffd700;
+    margin-top: 1rem;
+}
+
+.balance-amount i {
+    margin-right: 0.5rem;
+}
+
+.wallet-actions h3 {
+    margin-bottom: 1rem;
+    color: #ffd700;
+}
+
+.deposit-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.deposit-btn {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.deposit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.deposit-btn span {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.deposit-btn small {
+    opacity: 0.8;
+    margin-top: 0.5rem;
+}
+
+.custom-deposit {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.custom-deposit input {
+    flex: 1;
+    padding: 1rem;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+}
+
+.transaction-history {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 1.5rem;
+    border-radius: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.transaction-history h3 {
+    margin-bottom: 1rem;
+    color: #ffd700;
+}
+
+.transaction-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.transaction-item:last-child {
+    border-bottom: none;
+}
+
+.amount.positive {
+    color: #27ae60;
+}
+
+.amount.negative {
+    color: #e74c3c;
+}
+
+/* Color Game Styles */
+.color-game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 2rem 0;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.color-option {
+    width: 100px;
+    height: 100px;
+    border: 3px solid white;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.color-option:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.color-option.selected {
+    border-color: #ffd700;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.color-red { background: linear-gradient(45deg, #ff6b6b, #ee5a52); }
+.color-green { background: linear-gradient(45deg, #51cf66, #40c057); }
+.color-blue { background: linear-gradient(45deg, #339af0, #228be6); }
+.color-yellow { background: linear-gradient(45deg, #ffd43b, #fab005); }
+.color-purple { background: linear-gradient(45deg, #9775fa, #845ef7); }
+.color-orange { background: linear-gradient(45deg, #ff8cc8, #fd79a8); }
+
+.bet-amount-selector {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+.bet-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.bet-btn.active {
+    background: #ffd700;
+    color: #333;
+    border-color: #ffd700;
+}
+
+.bet-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Crash Game Styles */
+.crash-display {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.multiplier-display {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #ffd700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin: 2rem 0;
+}
+
+.crash-chart {
+    background: rgba(0, 0, 0, 0.3);
+    height: 200px;
+    border-radius: 10px;
+    margin: 2rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.rocket {
+    font-size: 3rem;
+    transition: all 0.1s;
+}
+
+.crash-controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem 0;
+}
+
+.crash-bet-input {
+    padding: 1rem;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.9);
+    width: 120px;
+    text-align: center;
+}
+
+.cashout-btn {
+    background: #27ae60;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.cashout-btn:hover {
+    background: #2ecc71;
+    transform: translateY(-2px);
+}
+
+.cashout-btn:disabled {
+    background: #666;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Enhanced Game Styles */
+.game-stats {
+    display: flex;
+    justify-content: space-around;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    border-radius: 10px;
+    margin: 1rem 0;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffd700;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Realistic enhancements */
+.game-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.game-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.game-card:hover::before {
+    left: 100%;
+}
+
+.live-indicator {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ff4757;
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+/* Mobile responsiveness for new elements */
+@media (max-width: 768px) {
+    .deposit-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .color-game-board {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 300px;
+    }
+    
+    .color-option {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .crash-controls {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .multiplier-display {
+        font-size: 2.5rem;
+    }
+}/* 
+Wallet Tabs */
+.wallet-tabs {
+    display: flex;
+    margin-bottom: 2rem;
+    border-radius: 10px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.tab-btn {
+    flex: 1;
+    background: transparent;
+    color: white;
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 1rem;
+}
+
+.tab-btn.active {
+    background: #ffd700;
+    color: #333;
+}
+
+.tab-btn:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.tab-btn i {
+    margin-right: 0.5rem;
+}
+
+/* Withdraw Styles */
+.withdraw-info {
+    background: rgba(255, 193, 7, 0.1);
+    border: 1px solid rgba(255, 193, 7, 0.3);
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
+
+.withdraw-info p {
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+    color: #ffd700;
+}
+
+.withdraw-info i {
+    margin-right: 0.5rem;
+}
+
+.withdraw-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.withdraw-btn {
+    background: linear-gradient(45deg, #e74c3c, #c0392b);
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.withdraw-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+}
+
+.withdraw-btn:disabled {
+    background: #666;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.withdraw-btn span {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.withdraw-btn small {
+    opacity: 0.8;
+    margin-top: 0.5rem;
+}
+
+.custom-withdraw {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.custom-withdraw input {
+    flex: 1;
+    padding: 1rem;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+}
+
+.custom-withdraw .btn-primary {
+    background: linear-gradient(45deg, #e74c3c, #c0392b);
+    min-width: 140px;
+}
+
+.custom-withdraw .btn-primary:hover {
+    background: linear-gradient(45deg, #c0392b, #a93226);
+}
+
+/* Payment Methods */
+.payment-methods {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.payment-methods h4 {
+    color: #ffd700;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.payment-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.payment-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 2px solid transparent;
+}
+
+.payment-option:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.payment-option input[type="radio"] {
+    display: none;
+}
+
+.payment-option input[type="radio"]:checked + .payment-icon {
+    transform: scale(1.2);
+}
+
+.payment-option input[type="radio"]:checked ~ span {
+    color: #ffd700;
+}
+
+.payment-option:has(input[type="radio"]:checked) {
+    border-color: #ffd700;
+    background: rgba(255, 215, 0, 0.1);
+}
+
+.payment-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    transition: transform 0.3s;
+}
+
+.payment-option span:last-child {
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+/* Withdrawal Status */
+.withdrawal-status {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 1rem;
+    border-radius: 10px;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.status-pending {
+    color: #f39c12;
+}
+
+.status-processing {
+    color: #3498db;
+}
+
+.status-completed {
+    color: #27ae60;
+}
+
+.status-failed {
+    color: #e74c3c;
+}
+
+/* Mobile responsiveness for withdraw */
+@media (max-width: 768px) {
+    .withdraw-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .payment-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .custom-withdraw {
+        flex-direction: column;
+    }
+    
+    .wallet-tabs {
+        flex-direction: column;
+    }
+}/
+* Wallet Modal Specific Styles */
+#walletModal .modal-content {
+    max-width: 500px;
+    max-height: 85vh;
+    overflow-y: auto;
+    margin: 2% auto;
+}
+
+/* Custom scrollbar for wallet modal */
+#walletModal .modal-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+#walletModal .modal-content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+#walletModal .modal-content::-webkit-scrollbar-thumb {
+    background: rgba(255, 215, 0, 0.5);
+    border-radius: 10px;
+}
+
+#walletModal .modal-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 215, 0, 0.7);
+}
+
+/* Ensure wallet content doesn't overflow */
+.wallet-info {
+    max-height: none;
+    overflow: visible;
+}
+
+/* Adjust transaction history height for better scrolling */
+.transaction-history {
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.transaction-history::-webkit-scrollbar {
+    width: 6px;
+}
+
+.transaction-history::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+.transaction-history::-webkit-scrollbar-thumb {
+    background: rgba(255, 215, 0, 0.3);
+    border-radius: 5px;
+}
+
+/* Mobile wallet modal adjustments */
+@media (max-width: 768px) {
+    #walletModal .modal-content {
+        margin: 1% auto;
+        max-height: 95vh;
+        width: 95%;
+        padding: 1.5rem;
+    }
+    
+    .wallet-tabs {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: rgba(0, 0, 0, 0.2);
+        margin: -1.5rem -1.5rem 2rem -1.5rem;
+        padding: 0;
+        border-radius: 15px 15px 0 0;
+    }
+    
+    .balance-display {
+        position: sticky;
+        top: 60px;
+        z-index: 9;
+        margin-bottom: 1rem;
+    }
+}/
+* Account Details Forms */
+.account-details {
+    margin-top: 2rem;
+}
+
+.account-form {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.account-form h4 {
+    color: #ffd700;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.account-form h4 i {
+    margin-right: 0.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    color: #ffd700;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    transition: all 0.3s;
+    box-sizing: border-box;
+}
+
+.form-group input:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.form-group input:invalid {
+    border: 2px solid #e74c3c;
+}
+
+.form-group input:valid {
+    border: 2px solid #27ae60;
+}
+
+.form-group small {
+    display: block;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+/* Form validation styles */
+.form-group input.error {
+    border: 2px solid #e74c3c;
+    background: rgba(231, 76, 60, 0.1);
+}
+
+.form-group input.success {
+    border: 2px solid #27ae60;
+    background: rgba(39, 174, 96, 0.1);
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    display: none;
+}
+
+.error-message.show {
+    display: block;
+}
+
+/* Enhanced withdraw buttons with validation */
+.withdraw-btn:disabled,
+.custom-withdraw .btn-primary:disabled {
+    background: #666;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Account details animation */
+.account-form {
+    animation: slideInUp 0.3s ease-out;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile responsiveness for forms */
+@media (max-width: 768px) {
+    .account-form {
+        padding: 1rem;
+    }
+    
+    .form-group input {
+        padding: 0.8rem;
+        font-size: 0.9rem;
+    }
+    
+    .form-group label {
+        font-size: 0.8rem;
+    }
+}/* OTP Veri
+fication Styles */
+.otp-verification {
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.otp-icon {
+    font-size: 3rem;
+    color: #ffd700;
+    margin-bottom: 1rem;
+}
+
+.otp-verification h3 {
+    color: #ffd700;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.otp-verification p {
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
+}
+
+.email-display {
+    color: #ffd700;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.otp-input-container {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 2rem 0;
+}
+
+.otp-input {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    transition: all 0.3s;
+}
+
+.otp-input:focus {
+    outline: none;
+    border-color: #ffd700;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    transform: scale(1.05);
+}
+
+.otp-input.filled {
+    background: rgba(255, 215, 0, 0.2);
+    border-color: #ffd700;
+}
+
+.otp-input.error {
+    border-color: #e74c3c;
+    background: rgba(231, 76, 60, 0.1);
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.otp-actions {
+    margin-top: 2rem;
+}
+
+.otp-actions p {
+    margin-bottom: 1rem;
+}
+
+.resend-btn {
+    background: none;
+    border: none;
+    color: #ffd700;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.resend-btn:hover:not(:disabled) {
+    color: #ffed4e;
+}
+
+.resend-btn:disabled {
+    color: #666;
+    cursor: not-allowed;
+    text-decoration: none;
+}
+
+.back-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.back-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.back-btn i {
+    margin-right: 0.5rem;
+}
+
+/* OTP Success Animation */
+.otp-success {
+    animation: successPulse 0.6s ease-in-out;
+}
+
+@keyframes successPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); background: rgba(39, 174, 96, 0.2); }
+    100% { transform: scale(1); }
+}
+
+/* Loading states */
+.btn-primary.loading {
+    position: relative;
+    color: transparent;
+}
+
+.btn-primary.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid transparent;
+    border-top: 2px solid #333;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Email simulation styles */
+.email-simulation {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 3000;
+    max-width: 300px;
+    animation: slideInRight 0.5s ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.email-simulation h4 {
+    color: #ffd700;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.email-simulation p {
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+}
+
+.email-simulation .otp-code {
+    background: rgba(255, 215, 0, 0.2);
+    padding: 0.5rem;
+    border-radius: 5px;
+    font-family: monospace;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 1rem 0;
+    border: 1px solid #ffd700;
+}
+
+.email-simulation .close-email {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+/* Mobile responsiveness for OTP */
+@media (max-width: 768px) {
+    .otp-input-container {
+        gap: 0.3rem;
+    }
+    
+    .otp-input {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    
+    .email-simulation {
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+    
+    .otp-verification h3 {
+        font-size: 1.3rem;
+    }
+}/
+* Email Instructions Styles */
+.email-instructions {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.instruction-content {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.close-instruction {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.instruction-content h4 {
+    color: #ffd700;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.instruction-content h4 i {
+    margin-right: 0.5rem;
+}
+
+.instruction-content ol {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+}
+
+.instruction-content li {
+    margin: 0.5rem 0;
+    line-height: 1.5;
+}
+
+.otp-display {
+    background: rgba(255, 215, 0, 0.2);
+    padding: 0.3rem 0.6rem;
+    border-radius: 5px;
+    font-family: monospace;
+    font-size: 1.2rem;
+    color: #ffd700;
+    border: 1px solid #ffd700;
+}
+
+.instruction-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 1.5rem 0;
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.btn-secondary i {
+    margin-right: 0.5rem;
+}
+
+.instruction-content small {
+    display: block;
+    text-align: center;
+    opacity: 0.8;
+    margin-top: 1rem;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Mobile responsiveness for instructions */
+@media (max-width: 768px) {
+    .instruction-content {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+    
+    .instruction-actions {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+    }
+}/* Enhanced 
+OTP Display */
+.otp-display-large {
+    background: linear-gradient(45deg, #ffd700, #ffed4e);
+    color: #333;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    font-family: 'Courier New', monospace;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 1.5rem 0;
+    border: 3px solid #ffd700;
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+    letter-spacing: 0.2em;
+}
+
+/* Updated instruction content */
+.instruction-content h4 {
+    color: #ffd700;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-size: 1.3rem;
+}
+
+.instruction-content p:first-of-type {
+    color: #ff6b6b;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+/* Notification color updates */
+.notification.info {
+    background: #3498db;
+}
+
+.notification.warning {
+    background: #f39c12;
+}
+
+/* Mobile responsiveness for large OTP display */
+@media (max-width: 768px) {
+    .otp-display-large {
+        font-size: 1.5rem;
+        padding: 0.8rem 1.5rem;
+        letter-spacing: 0.1em;
+    }
+}/* Landin
+g Page Styles */
+#landing-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.hero-landing {
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.landing-content {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.logo-large {
+    margin-bottom: 2rem;
+}
+
+.logo-large i {
+    font-size: 4rem;
+    color: #ffd700;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.logo-large h1 {
+    font-size: 3.5rem;
+    margin: 0;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.tagline {
+    font-size: 1.5rem;
+    color: #ffd700;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.description {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 3rem;
+    line-height: 1.6;
+}
+
+.auth-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+.btn-primary-large,
+.btn-secondary-large {
+    padding: 1.2rem 2.5rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 180px;
+    justify-content: center;
+}
+
+.btn-primary-large {
+    background: linear-gradient(45deg, #ffd700, #ffed4e);
+    color: #333;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+}
+
+.btn-primary-large:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+}
+
+.btn-secondary-large {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.btn-secondary-large:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-3px);
+}
+
+.features-preview {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    color: white;
+    font-size: 1rem;
+}
+
+.feature-item i {
+    color: #ffd700;
+    font-size: 1.2rem;
+    width: 20px;
+    text-align: center;
+}
+
+/* Hide header navigation on landing page */
+#landing-page ~ .header .nav {
+    display: none;
+}
+
+/* Show simplified header on landing page */
+#landing-page ~ .header {
+    background: transparent;
+    position: absolute;
+    top: 0;
+}
+
+#landing-page ~ .header .logo {
+    color: white;
+}
+
+#landing-page ~ .header .auth-buttons {
+    display: none;
+}
+
+/* Main site header (when logged in) */
+#main-site ~ .header {
+    background: rgba(0, 0, 0, 0.8);
+    position: fixed;
+}
+
+/* Mobile responsiveness for landing page */
+@media (max-width: 768px) {
+    .logo-large h1 {
+        font-size: 2.5rem;
+    }
+    
+    .logo-large i {
+        font-size: 3rem;
+    }
+    
+    .tagline {
+        font-size: 1.2rem;
+    }
+    
+    .description {
+        font-size: 1rem;
+    }
+    
+    .auth-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn-primary-large,
+    .btn-secondary-large {
+        width: 100%;
+        max-width: 280px;
+    }
+    
+    .features-preview {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .landing-content {
+        padding: 1rem;
+    }
+}/* L
+ogin/Register Method Tabs */
+.login-method-tabs,
+.register-method-tabs {
+    display: flex;
+    margin-bottom: 2rem;
+    border-radius: 10px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.method-tab {
+    flex: 1;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.7);
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.method-tab.active {
+    background: #ffd700;
+    color: #333;
+    font-weight: bold;
+}
+
+.method-tab:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.method-tab i {
+    font-size: 1rem;
+}
+
+/* Mobile Input Group */
+.mobile-input-group {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.mobile-input-group select {
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 5px;
+    padding: 1rem;
+    font-size: 1rem;
+    min-width: 100px;
+    cursor: pointer;
+}
+
+.mobile-input-group input {
+    flex: 1;
+    padding: 1rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.mobile-input-group select:focus,
+.mobile-input-group input:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+/* Form Styling Updates */
+#email-login-form,
+#mobile-login-form,
+#email-register-form,
+#mobile-register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Contact Display (for both email and mobile) */
+.contact-display {
+    color: #ffd700;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    word-break: break-all;
+}
+
+/* Enhanced Button Styles */
+.btn-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .mobile-input-group {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .mobile-input-group select {
+        min-width: auto;
+    }
+    
+    .method-tab {
+        padding: 0.8rem;
+        font-size: 0.8rem;
+    }
+    
+    .login-method-tabs,
+    .register-method-tabs {
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* Country Code Select Styling */
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1rem;
+    padding-right: 3rem;
+}
+
+/* Form Animation */
+#email-login-form,
+#mobile-login-form,
+#email-register-form,
+#mobile-register-form {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}/* S
+MS Simulation Styles */
+.sms-simulation {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 3000;
+    max-width: 300px;
+    animation: slideInRight 0.5s ease-out;
+}
+
+.sms-content h4 {
+    color: white;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.sms-content p {
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+}
+
+.close-sms {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+/* Enhanced Modal Content for Mobile Support */
+.modal-content {
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+/* Mobile responsiveness for SMS simulation */
+@media (max-width: 768px) {
+    .sms-simulation {
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+}/
+* Auth Links Styling */
+.auth-links {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.auth-links p {
+    margin: 0.5rem 0;
+}
+
+.auth-links a {
+    color: #ffd700;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.auth-links a:hover {
+    color: #ffed4e;
+    text-decoration: underline;
+}
+
+/* Forgot Password Styles */
+.forgot-description {
+    text-align: center;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+    line-height: 1.5;
+}
+
+.recovery-method-tabs {
+    display: flex;
+    margin-bottom: 2rem;
+    border-radius: 10px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#email-recovery-form,
+#mobile-recovery-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* New Password Form Styles */
+.new-password-form {
+    text-align: center;
+}
+
+.success-icon {
+    font-size: 3rem;
+    color: #27ae60;
+    margin-bottom: 1rem;
+}
+
+.new-password-form h3 {
+    color: #ffd700;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.new-password-form p {
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.password-input-group {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.password-input-group input {
+    width: 100%;
+    padding: 1rem 3rem 1rem 1rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.9);
+    box-sizing: border-box;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: color 0.3s;
+}
+
+.password-toggle:hover {
+    color: #333;
+}
+
+.password-input-group input:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+/* Reset OTP Input Styling */
+.reset-otp {
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.reset-otp:focus {
+    border-color: #27ae60;
+    box-shadow: 0 0 10px rgba(39, 174, 96, 0.5);
+}
+
+.reset-otp.filled {
+    background: rgba(39, 174, 96, 0.2);
+    border-color: #27ae60;
+}
+
+.reset-otp.error {
+    border-color: #e74c3c;
+    background: rgba(231, 76, 60, 0.1);
+}
+
+/* Enhanced Button States */
+.btn-primary:disabled {
+    background: #666;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.btn-primary.loading {
+    position: relative;
+    color: transparent;
+}
+
+.btn-primary.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid transparent;
+    border-top: 2px solid #333;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Password Strength Indicator */
+.password-strength {
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+}
+
+.strength-weak {
+    color: #e74c3c;
+}
+
+.strength-medium {
+    color: #f39c12;
+}
+
+.strength-strong {
+    color: #27ae60;
+}
+
+/* Mobile Responsiveness for Forgot Password */
+@media (max-width: 768px) {
+    .recovery-method-tabs {
+        margin-bottom: 1.5rem;
+    }
+    
+    .password-input-group input {
+        padding: 0.8rem 2.5rem 0.8rem 0.8rem;
+        font-size: 0.9rem;
+    }
+    
+    .password-toggle {
+        right: 0.8rem;
+        font-size: 0.9rem;
+    }
+    
+    .forgot-description {
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* New Modern Wallet Modal Styles */
+.wallet-modal {
+    max-width: 1000px !important;
+    width: 95% !important;
+    max-height: 90vh;
+    overflow-y: auto;
+    margin: 2% auto !important;
+    padding: 0 !important;
+    position: relative;
+    z-index: 2001;
+}
+
+/* Prevent background scroll when modal is open */
+body.modal-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+}
+
+/* Enhanced modal overlay for wallet */
+#walletModal {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+#walletModal::-webkit-scrollbar {
+    width: 8px;
+}
+
+#walletModal::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+#walletModal::-webkit-scrollbar-thumb {
+    background: rgba(255, 215, 0, 0.5);
+    border-radius: 4px;
+}
+
+#walletModal::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 215, 0, 0.7);
+}
+
+.wallet-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 2rem;
+    border-radius: 15px 15px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.wallet-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.wallet-title i {
+    font-size: 2rem;
+    color: #ffd700;
+}
+
+.wallet-title h2 {
+    margin: 0;
+    color: white;
+    font-size: 1.8rem;
+}
+
+.balance-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+    border-radius: 15px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.balance-label {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.balance-amount {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffd700;
+    margin-bottom: 0.5rem;
+}
+
+.balance-amount i {
+    font-size: 1.5rem;
+}
+
+.balance-amount small {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.balance-conversion {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+}
+
+.wallet-content {
+    display: flex;
+    min-height: 500px;
+    max-height: calc(90vh - 120px);
+    overflow-y: auto;
+}
+
+.wallet-left {
+    flex: 2;
+    padding: 2rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    overflow-y: auto;
+    max-height: 100%;
+}
+
+.wallet-right {
+    flex: 1;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.wallet-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 0.5rem;
+}
+
+.wallet-tab {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.wallet-tab.active {
+    background: #ffd700;
+    color: #333;
+}
+
+.wallet-tab:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.wallet-tab i {
+    font-size: 1.2rem;
+}
+
+.wallet-tab span {
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.wallet-tab-content h3 {
+    color: #ffd700;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.quick-amounts, .quick-withdrawals {
+    margin-bottom: 2rem;
+}
+
+.quick-amounts h4, .quick-withdrawals h4, .custom-amount h4, .custom-withdraw h4 {
+    color: white;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.amount-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.amount-btn, .withdraw-amount-btn {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border: none;
+    border-radius: 10px;
+    padding: 1rem;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.amount-btn:hover, .withdraw-amount-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.withdraw-amount-btn {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+}
+
+.amount-btn .amount, .withdraw-amount-btn .amount {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.amount-btn small, .withdraw-amount-btn small {
+    opacity: 0.8;
+    font-size: 0.8rem;
+}
+
+.amount-input-group {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 0.5rem;
+}
+
+.currency {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 8px 0 0 8px;
+    color: #ffd700;
+    font-weight: bold;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-right: none;
+}
+
+.amount-input-group input {
+    flex: 1;
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-left: none;
+    border-right: none;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 0;
+    font-size: 1rem;
+}
+
+.add-btn, .withdraw-btn-custom {
+    background: #27ae60;
+    color: white;
+    border: none;
+    padding: 1rem 1.5rem;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-left: none;
+}
+
+.withdraw-btn-custom {
+    background: #e74c3c;
+}
+
+.add-btn:hover, .withdraw-btn-custom:hover {
+    transform: translateY(-2px);
+}
+
+.withdraw-info-card {
+    background: rgba(255, 193, 7, 0.1);
+    border: 1px solid rgba(255, 193, 7, 0.3);
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #ffd700;
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+}
+
+.payment-methods-section {
+    margin-top: 2rem;
+}
+
+.payment-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.payment-card {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid transparent;
+    border-radius: 10px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: block;
+}
+
+.payment-card:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.payment-card:has(input:checked) {
+    border-color: #ffd700;
+    background: rgba(255, 215, 0, 0.1);
+}
+
+.payment-card input {
+    display: none;
+}
+
+.payment-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: center;
+}
+
+.payment-icon {
+    font-size: 2rem;
+}
+
+.payment-name {
+    font-weight: bold;
+    color: white;
+}
+
+.payment-info small {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8rem;
+}
+
+.transaction-list {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.transaction-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.transaction-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.transaction-icon.positive {
+    background: rgba(39, 174, 96, 0.2);
+    color: #27ae60;
+}
+
+.transaction-icon.negative {
+    background: rgba(231, 76, 60, 0.2);
+    color: #e74c3c;
+}
+
+.transaction-details {
+    flex: 1;
+}
+
+.transaction-title {
+    font-weight: bold;
+    color: white;
+    margin-bottom: 0.2rem;
+}
+
+.transaction-date {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8rem;
+}
+
+.transaction-amount {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.transaction-amount.positive {
+    color: #27ae60;
+}
+
+.transaction-amount.negative {
+    color: #e74c3c;
+}
+
+.wallet-stats h4, .wallet-features h4 {
+    color: #ffd700;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.stat-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 215, 0, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffd700;
+}
+
+.stat-value {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+}
+
+.stat-label {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8rem;
+}
+
+.feature-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+}
+
+.feature-item i {
+    color: #ffd700;
+    width: 20px;
+    text-align: center;
+}
+
+/* Mobile Responsiveness for New Wallet */
+@media (max-width: 768px) {
+    .wallet-modal {
+        width: 98% !important;
+        margin: 1% auto !important;
+        max-height: 95vh;
+    }
+    
+    .wallet-header {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1.5rem;
+    }
+    
+    .wallet-content {
+        flex-direction: column;
+    }
+    
+    .wallet-left {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 1.5rem;
+    }
+    
+    .wallet-right {
+        padding: 1.5rem;
+    }
+    
+    .amount-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .payment-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .wallet-tabs {
+        flex-direction: row;
+    }
+    
+    .wallet-tab {
+        padding: 0.8rem;
+    }
+    
+    .wallet-tab span {
+        font-size: 0.8rem;
+    }
+}

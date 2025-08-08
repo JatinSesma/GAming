@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameHub - Demo Gaming Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-gamepad"></i>
+                <span>GameHub</span>
+            </div>
+            <nav class="nav">
+                <a href="#home">Home</a>
+                <a href="#games">Games</a>
+                <a href="#wallet" onclick="showWallet()">Wallet</a>
+                <a href="#promotions">Promotions</a>
+                <a href="#support">Support</a>
+            </nav>
+            <div class="auth-buttons">
+                <button class="btn-login" onclick="showLogin()">Login</button>
+                <button class="btn-register" onclick="showRegister()">Register</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Landing Page (Shown when not logged in) -->
+    <div id="landing-page">
+        <!-- Hero Section -->
+        <section class="hero-landing">
+            <div class="container">
+                <div class="landing-content">
+                    <div class="logo-large">
+                        <i class="fas fa-gamepad"></i>
+                        <h1>GameHub</h1>
+                    </div>
+                    <p class="tagline">Experience the thrill of online gaming</p>
+                    <p class="description">Join thousands of players in exciting games. Win big, play safe, and have
+                        fun!</p>
+
+                    <div class="auth-actions">
+                        <button class="btn-primary-large" onclick="showRegister()">
+                            <i class="fas fa-user-plus"></i> Create Account
+                        </button>
+                        <button class="btn-secondary-large" onclick="showLogin()">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </button>
+                    </div>
+
+                    <div class="features-preview">
+                        <div class="feature-item">
+                            <i class="fas fa-dice"></i>
+                            <span>6+ Games</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-gift"></i>
+                            <span>Welcome Bonus</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Secure Gaming</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-mobile-alt"></i>
+                            <span>Mobile Friendly</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Main Gaming Site (Hidden until logged in) -->
+    <div id="main-site" style="display: none;">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>Welcome to GameHub</h1>
+                <p>Experience the thrill of online gaming with our demo platform</p>
+                <button class="btn-primary" onclick="showWallet()">
+                    <i class="fas fa-wallet"></i> My Wallet
+                </button>
+            </div>
+        </section>
+
+        <!-- Games Section -->
+        <section class="games-section" id="games">
+            <div class="container">
+                <h2>Popular Games</h2>
+                <div class="games-grid">
+                    <div class="game-card" onclick="playGame('slots')">
+                        <div class="game-icon">🎰</div>
+                        <h3>Lucky Slots</h3>
+                        <p>Spin to win big!</p>
+                    </div>
+                    <div class="game-card" onclick="playGame('roulette')">
+                        <div class="game-icon">🎯</div>
+                        <h3>Roulette</h3>
+                        <p>Place your bets</p>
+                    </div>
+                    <div class="game-card" onclick="playGame('blackjack')">
+                        <div class="game-icon">🃏</div>
+                        <h3>Blackjack</h3>
+                        <p>Beat the dealer</p>
+                    </div>
+                    <div class="game-card" onclick="playGame('poker')">
+                        <div class="game-icon">♠️</div>
+                        <h3>Poker</h3>
+                        <p>Show your skills</p>
+                    </div>
+                    <div class="game-card" onclick="playGame('color')">
+                        <div class="game-icon">🌈</div>
+                        <h3>Color Game</h3>
+                        <p>Pick the winning color</p>
+                    </div>
+                    <div class="game-card" onclick="playGame('crash')">
+                        <div class="game-icon">🚀</div>
+                        <h3>Crash</h3>
+                        <p>Cash out before crash</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- User Dashboard (Hidden by default) -->
+    <div class="dashboard" id="dashboard" style="display: none;">
+        <div class="dashboard-header">
+            <div class="user-info">
+                <span id="username">Welcome, User!</span>
+                <div class="balance">
+                    <i class="fas fa-wallet"></i>
+                    <span id="balance">1000</span> Credits
+                </div>
+                <button class="btn-wallet" onclick="showWallet()">
+                    <i class="fas fa-plus"></i> Add Funds
+                </button>
+            </div>
+            <button class="btn-logout" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2>Login</h2>
+
+            <!-- Login Method Selection -->
+            <div class="login-method-tabs">
+                <button type="button" class="method-tab active" onclick="switchLoginMethod('email')">
+                    <i class="fas fa-envelope"></i> Email
+                </button>
+                <button type="button" class="method-tab" onclick="switchLoginMethod('mobile')">
+                    <i class="fas fa-mobile-alt"></i> Mobile
+                </button>
+            </div>
+
+            <!-- Email Login Form -->
+            <form id="email-login-form" onsubmit="login(event, 'email')">
+                <input type="email" id="login-email" placeholder="Email Address" required>
+                <input type="password" id="login-password-email" placeholder="Password" required>
+                <button type="submit" class="btn-primary">
+                    <i class="fas fa-sign-in-alt"></i> Login with Email
+                </button>
+            </form>
+
+            <!-- Mobile Login Form -->
+            <form id="mobile-login-form" style="display: none;" onsubmit="login(event, 'mobile')">
+                <div class="mobile-input-group">
+                    <select id="country-code-login">
+                        <option value="+91">🇮🇳 +91</option>
+                        <option value="+1">🇺🇸 +1</option>
+                        <option value="+44">🇬🇧 +44</option>
+                        <option value="+86">🇨🇳 +86</option>
+                    </select>
+                    <input type="tel" id="login-mobile" placeholder="Mobile Number" required pattern="[0-9]{10}">
+                </div>
+                <input type="password" id="login-password-mobile" placeholder="Password" required>
+                <button type="submit" class="btn-primary">
+                    <i class="fas fa-sign-in-alt"></i> Login with Mobile
+                </button>
+            </form>
+
+            <div class="auth-links">
+                <p>Don't have an account? <a href="#" onclick="showRegister()">Register here</a></p>
+                <p><a href="#" onclick="showForgotPassword()">Forgot Password?</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('registerModal')">&times;</span>
+            <h2>Register</h2>
+
+            <!-- Step 1: Registration Form -->
+            <div id="registration-step-1">
+                <!-- Registration Method Selection -->
+                <div class="register-method-tabs">
+                    <button type="button" class="method-tab active" onclick="switchRegisterMethod('email')">
+                        <i class="fas fa-envelope"></i> Email
+                    </button>
+                    <button type="button" class="method-tab" onclick="switchRegisterMethod('mobile')">
+                        <i class="fas fa-mobile-alt"></i> Mobile
+                    </button>
+                </div>
+
+                <!-- Email Registration Form -->
+                <form id="email-register-form" onsubmit="sendOTP(event, 'email')">
+                    <input type="text" id="reg-username-email" placeholder="Username" required>
+                    <input type="email" id="reg-email" placeholder="Email Address" required>
+                    <input type="password" id="reg-password-email" placeholder="Password" required>
+                    <input type="password" id="reg-confirm-password-email" placeholder="Confirm Password" required>
+                    <button type="submit" class="btn-primary" id="send-otp-btn-email">
+                        <i class="fas fa-envelope"></i> Send OTP to Email
+                    </button>
+                </form>
+
+                <!-- Mobile Registration Form -->
+                <form id="mobile-register-form" style="display: none;" onsubmit="sendOTP(event, 'mobile')">
+                    <input type="text" id="reg-username-mobile" placeholder="Username" required>
+                    <div class="mobile-input-group">
+                        <select id="country-code-register">
+                            <option value="+91">🇮🇳 +91</option>
+                            <option value="+1">🇺🇸 +1</option>
+                            <option value="+44">🇬🇧 +44</option>
+                            <option value="+86">🇨🇳 +86</option>
+                        </select>
+                        <input type="tel" id="reg-mobile" placeholder="Mobile Number" required pattern="[0-9]{10}">
+                    </div>
+                    <input type="password" id="reg-password-mobile" placeholder="Password" required>
+                    <input type="password" id="reg-confirm-password-mobile" placeholder="Confirm Password" required>
+                    <button type="submit" class="btn-primary" id="send-otp-btn-mobile">
+                        <i class="fas fa-sms"></i> Send OTP to Mobile
+                    </button>
+                </form>
+
+                <div class="auth-links">
+                    <p>Already have an account? <a href="#" onclick="showLogin()">Login here</a></p>
+                </div>
+            </div>
+
+            <!-- Step 2: OTP Verification -->
+            <div id="registration-step-2" style="display: none;">
+                <div class="otp-verification">
+                    <div class="otp-icon">
+                        <i class="fas fa-envelope-open-text"></i>
+                    </div>
+                    <h3 id="verify-title">Verify Your Email</h3>
+                    <p id="verify-message">We've sent a 6-digit OTP to</p>
+                    <p class="contact-display" id="otp-contact-display"></p>
+
+                    <form onsubmit="verifyOTP(event)">
+                        <div class="otp-input-container">
+                            <input type="text" class="otp-input" maxlength="1" oninput="moveToNext(this, 0)">
+                            <input type="text" class="otp-input" maxlength="1" oninput="moveToNext(this, 1)">
+                            <input type="text" class="otp-input" maxlength="1" oninput="moveToNext(this, 2)">
+                            <input type="text" class="otp-input" maxlength="1" oninput="moveToNext(this, 3)">
+                            <input type="text" class="otp-input" maxlength="1" oninput="moveToNext(this, 4)">
+                            <input type="text" class="otp-input" maxlength="1" oninput="moveToNext(this, 5)">
+                        </div>
+
+                        <button type="submit" class="btn-primary" id="verify-otp-btn">
+                            <i class="fas fa-check-circle"></i> Verify OTP
+                        </button>
+                    </form>
+
+                    <div class="otp-actions">
+                        <p>Didn't receive OTP?
+                            <button type="button" class="resend-btn" id="resend-otp-btn" onclick="resendOTP()" disabled>
+                                Resend OTP (<span id="resend-timer">60</span>s)
+                            </button>
+                        </p>
+                        <button type="button" class="back-btn" onclick="goBackToRegistration()">
+                            <i class="fas fa-arrow-left"></i> Back to Registration
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Modal -->
+    <div class="modal" id="gameModal">
+        <div class="modal-content game-content">
+            <span class="close" onclick="closeModal('gameModal')">&times;</span>
+            <div id="gameArea">
+                <!-- Game content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Wallet Modal -->
+    <div class="modal" id="walletModal">
+        <div class="modal-content wallet-modal"></div>
+        <span class="close" onclick="closeModal('walletModal')">&times;</span>
+
+        <!-- Wallet Header -->
+        <div class="wallet-header">
+            <div class="wallet-title">
+                <i class="fas fa-wallet"></i>
+                <h2>My Wallet</h2>
+            </div>
+            <div class="balance-card">
+                <div class="balance-label">Available Balance</div>
+                <div class="balance-amount">
+                    <i class="fas fa-coins"></i>
+                    <span id="wallet-balance">1000</span>
+                    <small>Credits</small>
+                </div>
+                <div class="balance-conversion">≈ ₹<span id="balance-inr">100</span></div>
+            </div>
+        </div>
+
+        <!-- Wallet Content -->
+        <div class="wallet-content">
+            <!-- Left Panel - Actions -->
+            <div class="wallet-left">
+                <div class="wallet-tabs">
+                    <button class="wallet-tab active" onclick="showWalletTab('deposit')">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Add Money</span>
+                    </button>
+                    <button class="wallet-tab" onclick="showWalletTab('withdraw')">
+                        <i class="fas fa-minus-circle"></i>
+                        <span>Withdraw</span>
+                    </button>
+                    <button class="wallet-tab" onclick="showWalletTab('history')">
+                        <i class="fas fa-history"></i>
+                        <span>History</span>
+                    </button>
+                </div>
+
+                <!-- Deposit Tab -->
+                <div class="wallet-tab-content" id="deposit-content">
+                    <h3><i class="fas fa-plus"></i> Add Money to Wallet</h3>
+
+                    <div class="quick-amounts">
+                        <h4>Quick Add</h4>
+                        <div class="amount-grid">
+                            <button class="amount-btn" onclick="addFunds(100)">
+                                <span class="amount">₹10</span>
+                                <small>100 Credits</small>
+                            </button>
+                            <button class="amount-btn" onclick="addFunds(500)">
+                                <span class="amount">₹50</span>
+                                <small>500 Credits</small>
+                            </button>
+                            <button class="amount-btn" onclick="addFunds(1000)">
+                                <span class="amount">₹100</span>
+                                <small>1000 Credits</small>
+                            </button>
+                            <button class="amount-btn" onclick="addFunds(2000)">
+                                <span class="amount">₹200</span>
+                                <small>2000 Credits</small>
+                            </button>
+                            <button class="amount-btn" onclick="addFunds(5000)">
+                                <span class="amount">₹500</span>
+                                <small>5000 Credits</small>
+                            </button>
+                            <button class="amount-btn" onclick="addFunds(10000)">
+                                <span class="amount">₹1000</span>
+                                <small>10000 Credits</small>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="custom-amount">
+                        <h4>Custom Amount</h4>
+                        <div class="amount-input-group">
+                            <span class="currency">₹</span>
+                            <input type="number" id="customAmount" placeholder="Enter amount" min="10" max="10000">
+                            <button class="add-btn" onclick="addCustomFunds()">
+                                <i class="fas fa-plus"></i> Add Money
+                            </button>
+                        </div>
+                        <small>Minimum: ₹10 | Maximum: ₹10,000</small>
+                    </div>
+                </div>
+
+                <!-- Withdraw Tab -->
+                <div class="wallet-tab-content" id="withdraw-content" style="display: none;">
+                    <h3><i class="fas fa-minus"></i> Withdraw Money</h3>
+
+                    <div class="withdraw-info-card">
+                        <div class="info-item">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Minimum withdrawal: ₹10 (100 credits)</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Processing time: 1-3 business days</span>
+                        </div>
+                    </div>
+
+                    <div class="quick-withdrawals">
+                        <h4>Quick Withdraw</h4>
+                        <div class="amount-grid">
+                            <button class="withdraw-amount-btn" onclick="withdrawFunds(100)">
+                                <span class="amount">₹10</span>
+                                <small>100 Credits</small>
+                            </button>
+                            <button class="withdraw-amount-btn" onclick="withdrawFunds(500)">
+                                <span class="amount">₹50</span>
+                                <small>500 Credits</small>
+                            </button>
+                            <button class="withdraw-amount-btn" onclick="withdrawFunds(1000)">
+                                <span class="amount">₹100</span>
+                                <small>1000 Credits</small>
+                            </button>
+                            <button class="withdraw-amount-btn" onclick="withdrawFunds(2000)">
+                                <span class="amount">₹200</span>
+                                <small>2000 Credits</small>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="custom-withdraw">
+                        <h4>Custom Withdrawal</h4>
+                        <div class="amount-input-group">
+                            <span class="currency">₹</span>
+                            <input type="number" id="customWithdrawAmount" placeholder="Enter amount" min="10"
+                                max="5000">
+                            <button class="withdraw-btn-custom" onclick="withdrawCustomFunds()">
+                                <i class="fas fa-money-bill-wave"></i> Withdraw
+                            </button>
+                        </div>
+                        <small>Available: ₹<span id="available-withdraw">100</span></small>
+                    </div>
+
+                    <div class="payment-methods-section">
+                        <h4>Select Payment Method</h4>
+                        <div class="payment-grid">
+                            <label class="payment-card">
+                                <input type="radio" name="paymentMethod" value="upi" checked>
+                                <div class="payment-content">
+                                    <div class="payment-icon">📱</div>
+                                    <div class="payment-info">
+                                        <span class="payment-name">UPI</span>
+                                        <small>Instant transfer</small>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="payment-card">
+                                <input type="radio" name="paymentMethod" value="bank">
+                                <div class="payment-content">
+                                    <div class="payment-icon">🏦</div>
+                                    <div class="payment-info">
+                                        <span class="payment-name">Bank Transfer</span>
+                                        <small>1-3 business days</small>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="payment-card">
+                                <input type="radio" name="paymentMethod" value="paytm">
+                                <div class="payment-content">
+                                    <div class="payment-icon">💳</div>
+                                    <div class="payment-info">
+                                        <span class="payment-name">Paytm</span>
+                                        <small>Instant transfer</small>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- History Tab -->
+                <div class="wallet-tab-content" id="history-content" style="display: none;">
+                    <h3><i class="fas fa-history"></i> Transaction History</h3>
+                    <div class="transaction-list" id="transactionList">
+                        <div class="transaction-card">
+                            <div class="transaction-icon positive">
+                                <i class="fas fa-gift"></i>
+                            </div>
+                            <div class="transaction-details">
+                                <div class="transaction-title">Welcome Bonus</div>
+                                <div class="transaction-date">Today, 12:00 PM</div>
+                            </div>
+                            <div class="transaction-amount positive">+1000</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel - Stats & Info -->
+            <div class="wallet-right">
+                <div class="wallet-stats">
+                    <h4>Wallet Statistics</h4>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-value">₹0</div>
+                            <div class="stat-label">Total Deposited</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-value">₹0</div>
+                            <div class="stat-label">Total Winnings</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-value">1000</div>
+                            <div class="stat-label">Bonus Credits</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wallet-features">
+                    <h4>Features</h4>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>100% Secure Transactions</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-bolt"></i>
+                            <span>Instant Deposits</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-headset"></i>
+                            <span>24/7 Support</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-mobile-alt"></i>
+                            <span>Mobile Friendly</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div class="modal" id="forgotPasswordModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('forgotPasswordModal')">&times;</span>
+            <h2>Reset Password</h2>
+
+            <!-- Step 1: Choose Recovery Method -->
+            <div id="forgot-step-1">
+                <p class="forgot-description">Choose how you want to recover your password:</p>
+
+                <!-- Recovery Method Selection -->
+                <div class="recovery-method-tabs">
+                    <button type="button" class="method-tab active" onclick="switchRecoveryMethod('email')">
+                        <i class="fas fa-envelope"></i> Email
+                    </button>
+                    <button type="button" class="method-tab" onclick="switchRecoveryMethod('mobile')">
+                        <i class="fas fa-mobile-alt"></i> Mobile
+                    </button>
+                </div>
+
+                <!-- Email Recovery Form -->
+                <form id="email-recovery-form" onsubmit="sendPasswordResetOTP(event, 'email')">
+                    <input type="email" id="recovery-email" placeholder="Enter your registered email" required>
+                    <button type="submit" class="btn-primary" id="send-reset-otp-email">
+                        <i class="fas fa-envelope"></i> Send Reset Code
+                    </button>
+                </form>
+
+                <!-- Mobile Recovery Form -->
+                <form id="mobile-recovery-form" style="display: none;" onsubmit="sendPasswordResetOTP(event, 'mobile')">
+                    <div class="mobile-input-group">
+                        <select id="recovery-country-code">
+                            <option value="+91">🇮🇳 +91</option>
+                            <option value="+1">🇺🇸 +1</option>
+                            <option value="+44">🇬🇧 +44</option>
+                            <option value="+86">🇨🇳 +86</option>
+                        </select>
+                        <input type="tel" id="recovery-mobile" placeholder="Mobile Number" required pattern="[0-9]{10}">
+                    </div>
+                    <button type="submit" class="btn-primary" id="send-reset-otp-mobile">
+                        <i class="fas fa-sms"></i> Send Reset Code
+                    </button>
+                </form>
+
+                <div class="auth-links">
+                    <p>Remember your password? <a href="#" onclick="showLogin()">Login here</a></p>
+                </div>
+            </div>
+
+            <!-- Step 2: Verify Reset OTP -->
+            <div id="forgot-step-2" style="display: none;">
+                <div class="otp-verification">
+                    <div class="otp-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Verify Reset Code</h3>
+                    <p>We've sent a reset code to</p>
+                    <p class="contact-display" id="reset-contact-display"></p>
+
+                    <form onsubmit="verifyResetOTP(event)">
+                        <div class="otp-input-container">
+                            <input type="text" class="otp-input reset-otp" maxlength="1"
+                                oninput="moveToNextReset(this, 0)">
+                            <input type="text" class="otp-input reset-otp" maxlength="1"
+                                oninput="moveToNextReset(this, 1)">
+                            <input type="text" class="otp-input reset-otp" maxlength="1"
+                                oninput="moveToNextReset(this, 2)">
+                            <input type="text" class="otp-input reset-otp" maxlength="1"
+                                oninput="moveToNextReset(this, 3)">
+                            <input type="text" class="otp-input reset-otp" maxlength="1"
+                                oninput="moveToNextReset(this, 4)">
+                            <input type="text" class="otp-input reset-otp" maxlength="1"
+                                oninput="moveToNextReset(this, 5)">
+                        </div>
+
+                        <button type="submit" class="btn-primary" id="verify-reset-otp-btn">
+                            <i class="fas fa-check-circle"></i> Verify Code
+                        </button>
+                    </form>
+
+                    <div class="otp-actions">
+                        <p>Didn't receive code?
+                            <button type="button" class="resend-btn" id="resend-reset-otp-btn"
+                                onclick="resendResetOTP()" disabled>
+                                Resend Code (<span id="reset-resend-timer">60</span>s)
+                            </button>
+                        </p>
+                        <button type="button" class="back-btn" onclick="goBackToRecovery()">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Set New Password -->
+            <div id="forgot-step-3" style="display: none;">
+                <div class="new-password-form">
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3>Set New Password</h3>
+                    <p>Create a strong password for your account</p>
+
+                    <form onsubmit="resetPassword(event)">
+                        <div class="password-input-group">
+                            <input type="password" id="new-password" placeholder="New Password" required minlength="6">
+                            <button type="button" class="password-toggle"
+                                onclick="togglePasswordVisibility('new-password', this)">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="password-input-group">
+                            <input type="password" id="confirm-new-password" placeholder="Confirm New Password" required
+                                minlength="6">
+                            <button type="button" class="password-toggle"
+                                onclick="togglePasswordVisibility('confirm-new-password', this)">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+
+                        <button type="submit" class="btn-primary" id="reset-password-btn">
+                            <i class="fas fa-key"></i> Reset Password
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script-fixed.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameHub Debug</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        button { padding: 10px 20px; margin: 10px; font-size: 16px; }
+        .modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+                background: white; padding: 20px; border: 2px solid #333; z-index: 1000; }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+                        background: rgba(0,0,0,0.5); z-index: 999; }
+    </style>
+</head>
+<body>
+    <h1>GameHub Debug Test</h1>
+    
+    <h2>Test Buttons:</h2>
+    <button onclick="testShowLogin()">Test Login</button>
+    <button onclick="testShowRegister()">Test Register</button>
+    <button onclick="checkFunctions()">Check Functions</button>
+    
+    <div id="results"></div>
+    
+    <!-- Simple modals for testing -->
+    <div class="modal-overlay" id="overlay"></div>
+    <div class="modal" id="loginModal">
+        <h3>Login Modal</h3>
+        <p>This is the login modal</p>
+        <button onclick="closeTestModal()">Close</button>
+    </div>
+    
+    <div class="modal" id="registerModal">
+        <h3>Register Modal</h3>
+        <p>This is the register modal</p>
+        <button onclick="closeTestModal()">Close</button>
+    </div>
+    
+    <script>
+        // Simple test functions
+        function testShowLogin() {
+            console.log('Testing login...');
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('loginModal').style.display = 'block';
+        }
+        
+        function testShowRegister() {
+            console.log('Testing register...');
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('registerModal').style.display = 'block';
+        }
+        
+        function closeTestModal() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('loginModal').style.display = 'none';
+            document.getElementById('registerModal').style.display = 'none';
+        }
+        
+        function checkFunctions() {
+            const results = document.getElementById('results');
+            let html = '<h3>Function Check Results:</h3>';
+            
+            const functionsToCheck = ['showLogin', 'showRegister', 'closeModal', 'playGame'];
+            
+            functionsToCheck.forEach(funcName => {
+                if (typeof window[funcName] === 'function') {
+                    html += `<p style="color: green;">✓ ${funcName} exists</p>`;
+                } else {
+                    html += `<p style="color: red;">✗ ${funcName} missing</p>`;
+                }
+            });
+            
+            results.innerHTML = html;
+        }
+        
+        // Try to load the main script
+        const script = document.createElement('script');
+        script.src = 'script.js';
+        script.onload = function() {
+            console.log('Main script loaded successfully');
+            checkFunctions();
+        };
+        script.onerror = function() {
+            console.error('Failed to load main script');
+            document.getElementById('results').innerHTML = '<p style="color: red;">Failed to load script.js</p>';
+        };
+        document.head.appendChild(script);
+    </script>
+</body>
+</html>
