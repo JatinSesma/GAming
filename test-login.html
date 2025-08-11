@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Test</title>
+</head>
+<body>
+    <h1>Login Button Test</h1>
+    <button onclick="showLogin()">Test Login Button</button>
+    <button onclick="showRegister()">Test Register Button</button>
+    
+    <div id="test-results"></div>
+    
+    <script src="script-clean.js"></script>
+    <script>
+        // Test if functions are available
+        console.log('Testing functions...');
+        console.log('showLogin:', typeof window.showLogin);
+        console.log('showRegister:', typeof window.showRegister);
+        console.log('login:', typeof window.login);
+        
+        // Add test results to page
+        document.getElementById('test-results').innerHTML = `
+            <p>showLogin: ${typeof window.showLogin}</p>
+            <p>showRegister: ${typeof window.showRegister}</p>
+            <p>login: ${typeof window.login}</p>
+        `;
+    </script>
+</body>
+</html>

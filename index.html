@@ -402,76 +402,180 @@
                             <i class="fas fa-clock"></i>
                             <span>Processing time: 1-3 business days</span>
                         </div>
-                    </div>
-
-                    <div class="quick-withdrawals">
-                        <h4>Quick Withdraw</h4>
-                        <div class="amount-grid">
-                            <button class="withdraw-amount-btn" onclick="withdrawFunds(100)">
-                                <span class="amount">₹10</span>
-                                <small>100 Credits</small>
-                            </button>
-                            <button class="withdraw-amount-btn" onclick="withdrawFunds(500)">
-                                <span class="amount">₹50</span>
-                                <small>500 Credits</small>
-                            </button>
-                            <button class="withdraw-amount-btn" onclick="withdrawFunds(1000)">
-                                <span class="amount">₹100</span>
-                                <small>1000 Credits</small>
-                            </button>
-                            <button class="withdraw-amount-btn" onclick="withdrawFunds(2000)">
-                                <span class="amount">₹200</span>
-                                <small>2000 Credits</small>
-                            </button>
+                        <div class="info-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>All withdrawals are secure and encrypted</span>
                         </div>
                     </div>
 
-                    <div class="custom-withdraw">
-                        <h4>Custom Withdrawal</h4>
-                        <div class="amount-input-group">
-                            <span class="currency">₹</span>
-                            <input type="number" id="customWithdrawAmount" placeholder="Enter amount" min="10"
-                                max="5000">
-                            <button class="withdraw-btn-custom" onclick="withdrawCustomFunds()">
-                                <i class="fas fa-money-bill-wave"></i> Withdraw
-                            </button>
+                    <!-- Step 1: Amount Selection -->
+                    <div id="withdraw-step-1">
+                        <div class="quick-withdrawals">
+                            <h4>Quick Withdraw</h4>
+                            <div class="amount-grid">
+                                <button class="withdraw-amount-btn" onclick="selectWithdrawAmount(100)">
+                                    <span class="amount">₹10</span>
+                                    <small>100 Credits</small>
+                                </button>
+                                <button class="withdraw-amount-btn" onclick="selectWithdrawAmount(500)">
+                                    <span class="amount">₹50</span>
+                                    <small>500 Credits</small>
+                                </button>
+                                <button class="withdraw-amount-btn" onclick="selectWithdrawAmount(1000)">
+                                    <span class="amount">₹100</span>
+                                    <small>1000 Credits</small>
+                                </button>
+                                <button class="withdraw-amount-btn" onclick="selectWithdrawAmount(2000)">
+                                    <span class="amount">₹200</span>
+                                    <small>2000 Credits</small>
+                                </button>
+                            </div>
                         </div>
-                        <small>Available: ₹<span id="available-withdraw">100</span></small>
+
+                        <div class="custom-withdraw">
+                            <h4>Custom Withdrawal</h4>
+                            <div class="amount-input-group">
+                                <span class="currency">₹</span>
+                                <input type="number" id="customWithdrawAmount" placeholder="Enter amount" min="10"
+                                    max="5000">
+                                <button class="withdraw-btn-custom" onclick="selectCustomWithdrawAmount()">
+                                    <i class="fas fa-arrow-right"></i> Continue
+                                </button>
+                            </div>
+                            <small>Available: ₹<span id="available-withdraw">100</span></small>
+                        </div>
                     </div>
 
-                    <div class="payment-methods-section">
-                        <h4>Select Payment Method</h4>
-                        <div class="payment-grid">
-                            <label class="payment-card">
-                                <input type="radio" name="paymentMethod" value="upi" checked>
-                                <div class="payment-content">
-                                    <div class="payment-icon">📱</div>
-                                    <div class="payment-info">
-                                        <span class="payment-name">UPI</span>
-                                        <small>Instant transfer</small>
+                    <!-- Step 2: Payment Method Selection -->
+                    <div id="withdraw-step-2" style="display: none;">
+                        <div class="withdraw-amount-display">
+                            <h4>Withdrawal Amount</h4>
+                            <div class="selected-amount">
+                                <span class="amount-value">₹<span id="selected-withdraw-amount">0</span></span>
+                                <small>(<span id="selected-withdraw-credits">0</span> Credits)</small>
+                            </div>
+                            <button class="change-amount-btn" onclick="goBackToAmountSelection()">
+                                <i class="fas fa-edit"></i> Change Amount
+                            </button>
+                        </div>
+
+                        <div class="payment-methods-section">
+                            <h4>Select Payment Method</h4>
+                            <div class="payment-grid">
+                                <label class="payment-card" onclick="selectPaymentMethod('upi')">
+                                    <input type="radio" name="paymentMethod" value="upi" checked>
+                                    <div class="payment-content">
+                                        <div class="payment-icon">📱</div>
+                                        <div class="payment-info">
+                                            <span class="payment-name">UPI</span>
+                                            <small>Instant transfer</small>
+                                        </div>
                                     </div>
-                                </div>
-                            </label>
-                            <label class="payment-card">
-                                <input type="radio" name="paymentMethod" value="bank">
-                                <div class="payment-content">
-                                    <div class="payment-icon">🏦</div>
-                                    <div class="payment-info">
-                                        <span class="payment-name">Bank Transfer</span>
-                                        <small>1-3 business days</small>
+                                </label>
+                                <label class="payment-card" onclick="selectPaymentMethod('bank')">
+                                    <input type="radio" name="paymentMethod" value="bank">
+                                    <div class="payment-content">
+                                        <div class="payment-icon">🏦</div>
+                                        <div class="payment-info">
+                                            <span class="payment-name">Bank Transfer</span>
+                                            <small>1-3 business days</small>
+                                        </div>
                                     </div>
-                                </div>
-                            </label>
-                            <label class="payment-card">
-                                <input type="radio" name="paymentMethod" value="paytm">
-                                <div class="payment-content">
-                                    <div class="payment-icon">💳</div>
-                                    <div class="payment-info">
-                                        <span class="payment-name">Paytm</span>
-                                        <small>Instant transfer</small>
+                                </label>
+                                <label class="payment-card" onclick="selectPaymentMethod('paytm')">
+                                    <input type="radio" name="paymentMethod" value="paytm">
+                                    <div class="payment-content">
+                                        <div class="payment-icon">💳</div>
+                                        <div class="payment-info">
+                                            <span class="payment-name">Paytm</span>
+                                            <small>Instant transfer</small>
+                                        </div>
                                     </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Payment Details Forms -->
+                    <div id="withdraw-step-3" style="display: none;">
+                        <div class="payment-details-header">
+                            <h4>Payment Details</h4>
+                            <div class="selected-method-display">
+                                <span id="selected-method-name">UPI</span>
+                                <button class="change-method-btn" onclick="goBackToPaymentMethod()">
+                                    <i class="fas fa-edit"></i> Change
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- UPI Details Form -->
+                        <div id="upi-details-form" class="payment-details-form">
+                            <div class="form-group">
+                                <label for="upi-id">UPI ID</label>
+                                <input type="text" id="upi-id" placeholder="yourname@paytm" required>
+                                <small>Enter your UPI ID (e.g., 9876543210@paytm)</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="upi-holder-name">Account Holder Name</label>
+                                <input type="text" id="upi-holder-name" placeholder="Full Name as per bank account"
+                                    required>
+                            </div>
+                            <button class="proceed-btn" onclick="proceedWithdrawal('upi')">
+                                <i class="fas fa-check"></i> Proceed with UPI Withdrawal
+                            </button>
+                        </div>
+
+                        <!-- Bank Transfer Details Form -->
+                        <div id="bank-details-form" class="payment-details-form" style="display: none;">
+                            <div class="form-group">
+                                <label for="account-number">Account Number</label>
+                                <input type="text" id="account-number" placeholder="Enter account number" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm-account-number">Confirm Account Number</label>
+                                <input type="text" id="confirm-account-number" placeholder="Re-enter account number"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="ifsc-code">IFSC Code</label>
+                                <input type="text" id="ifsc-code" placeholder="e.g., SBIN0001234" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="bank-holder-name">Account Holder Name</label>
+                                <input type="text" id="bank-holder-name" placeholder="Full Name as per bank account"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="bank-name">Bank Name</label>
+                                <input type="text" id="bank-name" placeholder="e.g., State Bank of India" required>
+                            </div>
+                            <button class="proceed-btn" onclick="proceedWithdrawal('bank')">
+                                <i class="fas fa-check"></i> Proceed with Bank Transfer
+                            </button>
+                        </div>
+
+                        <!-- Paytm Details Form -->
+                        <div id="paytm-details-form" class="payment-details-form" style="display: none;">
+                            <div class="form-group">
+                                <label for="paytm-mobile">Paytm Mobile Number</label>
+                                <div class="mobile-input-group">
+                                    <select id="paytm-country-code">
+                                        <option value="+91">🇮🇳 +91</option>
+                                        <option value="+1">🇺🇸 +1</option>
+                                        <option value="+44">🇬🇧 +44</option>
+                                    </select>
+                                    <input type="tel" id="paytm-mobile" placeholder="Mobile Number" required
+                                        pattern="[0-9]{10}">
                                 </div>
-                            </label>
+                            </div>
+                            <div class="form-group">
+                                <label for="paytm-holder-name">Account Holder Name</label>
+                                <input type="text" id="paytm-holder-name" placeholder="Full Name as per Paytm account"
+                                    required>
+                            </div>
+                            <button class="proceed-btn" onclick="proceedWithdrawal('paytm')">
+                                <i class="fas fa-check"></i> Proceed with Paytm Withdrawal
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -551,6 +655,116 @@
             </div>
         </div>
     </div>
+    </div>
+
+    <!-- Withdrawal Confirmation Modal -->
+    <div class="modal" id="withdrawalConfirmModal">
+        <div class="modal-content withdrawal-confirm-modal">
+            <span class="close" onclick="closeModal('withdrawalConfirmModal')">&times;</span>
+
+            <div class="confirmation-header">
+                <div class="confirm-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <h2>Confirm Withdrawal</h2>
+                <p>Please review your withdrawal details carefully</p>
+            </div>
+
+            <div class="withdrawal-summary">
+                <div class="summary-card">
+                    <div class="summary-row">
+                        <span class="label">Amount:</span>
+                        <span class="value">₹<span id="confirm-amount">0</span></span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="label">Credits:</span>
+                        <span class="value"><span id="confirm-credits">0</span> Credits</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="label">Payment Method:</span>
+                        <span class="value" id="confirm-method">UPI</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="label">Account Details:</span>
+                        <span class="value" id="confirm-details">-</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="label">Processing Time:</span>
+                        <span class="value" id="confirm-processing">Instant</span>
+                    </div>
+                </div>
+
+                <div class="withdrawal-terms">
+                    <div class="terms-item">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Withdrawal requests cannot be cancelled once confirmed</span>
+                    </div>
+                    <div class="terms-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Processing times may vary based on your bank</span>
+                    </div>
+                    <div class="terms-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>All transactions are secure and encrypted</span>
+                    </div>
+                </div>
+
+                <div class="confirmation-actions">
+                    <button class="btn-cancel" onclick="closeModal('withdrawalConfirmModal')">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
+                    <button class="btn-confirm" onclick="confirmWithdrawal()">
+                        <i class="fas fa-check"></i> Confirm Withdrawal
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Withdrawal Success Modal -->
+    <div class="modal" id="withdrawalSuccessModal">
+        <div class="modal-content withdrawal-success-modal">
+            <span class="close" onclick="closeModal('withdrawalSuccessModal')">&times;</span>
+
+            <div class="success-content">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2>Withdrawal Successful!</h2>
+                <p>Your withdrawal request has been processed successfully</p>
+
+                <div class="success-details">
+                    <div class="detail-row">
+                        <span class="label">Transaction ID:</span>
+                        <span class="value" id="transaction-id">TXN123456789</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Amount:</span>
+                        <span class="value">₹<span id="success-amount">0</span></span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Status:</span>
+                        <span class="value status-processing">Processing</span>
+                    </div>
+                </div>
+
+                <div class="success-message">
+                    <i class="fas fa-info-circle"></i>
+                    <p>You will receive the amount in your account within the specified processing time. You can track
+                        this transaction in your wallet history.</p>
+                </div>
+
+                <div class="success-actions">
+                    <button class="btn-primary"
+                        onclick="closeModal('withdrawalSuccessModal'); showWalletTab('history');">
+                        <i class="fas fa-history"></i> View Transaction History
+                    </button>
+                    <button class="btn-secondary" onclick="closeModal('withdrawalSuccessModal')">
+                        <i class="fas fa-times"></i> Close
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Forgot Password Modal -->
@@ -682,7 +896,7 @@
         </div>
     </div>
 
-    <script src="script-fixed.js"></script>
+    <script src="script-clean.js"></script>
 </body>
 
 </html>
